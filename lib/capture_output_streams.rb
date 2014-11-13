@@ -3,7 +3,7 @@ require 'open4'
 require_relative 'capture_output_streams/system'
 require_relative 'capture_output_streams/backticks'
 
-module CaptureOutputStream
+module CaptureOutputStreams
 
   Kernel.module_eval do
 

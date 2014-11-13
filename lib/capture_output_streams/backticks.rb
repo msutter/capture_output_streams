@@ -1,4 +1,4 @@
-module CaptureOutputStream
+module CaptureOutputStreams
 
   Kernel.module_eval do
 

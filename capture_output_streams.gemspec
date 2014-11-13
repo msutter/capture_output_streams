@@ -6,7 +6,7 @@ require 'capture_output_streams/version'
 
 Gem::Specification.new do |spec|
   spec.name          = "capture_output_streams"
-  spec.version       = CaptureOutputStream::VERSION
+  spec.version       = CaptureOutputStreams::VERSION
   spec.authors       = ["Marc Sutter"]
   spec.email         = ["marc.sutter@swisscom.com"]
   spec.summary       = %q{control output streams of third party gems or libraries}
