@@ -41,10 +41,8 @@ module CaptureOutputStreams
 
       end
 
-      {
-        :stdout => fake_stdout.string,
-        :stderr => fake_stderr.string,
-      }
+      capture = Struct.new :stdout, :stderr
+      capture.new(fake_stdout.string, fake_stderr.string)
 
     end
 
