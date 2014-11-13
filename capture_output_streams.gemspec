@@ -5,7 +5,7 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'capture_output_streams/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "capture_output_stream"
+  spec.name          = "capture_output_streams"
   spec.version       = CaptureOutputStream::VERSION
   spec.authors       = ["Marc Sutter"]
   spec.email         = ["marc.sutter@swisscom.com"]
