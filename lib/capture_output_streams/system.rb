@@ -1,35 +1,37 @@
 module CaptureOutputStream
-Kernel.module_eval <<-EOV
 
-  def system(*args)
-    command = args.join(' ')
-    status = Open4::popen4(command) do |pid, stdin, stdout, stderr|
-      @pid=pid
-      @stdin=command
-      @stdout=""
-      @stderr=""
+  Kernel.module_eval do
 
-      while(line=stdout.gets)
-        @stdout+=line
-        puts line
+    def system(*args)
+      command = args.join(' ')
+      status = Open4::popen4(command) do |pid, stdin, stdout, stderr|
+        @pid=pid
+        @stdin=command
+        @stdout=""
+        @stderr=""
+
+        while(line=stdout.gets)
+          @stdout+=line
+          $stdout.puts line
+        end
+
+        while(line=stderr.gets)
+          @stderr+=line
+          $stderr.puts line
+        end
+
+        unless @stdout.nil?
+          @stdout=@stdout.strip
+        end
+
+        unless @stderr.nil?
+          @stderr=@stderr.strip
+        end
+
       end
-
-      while(line=stderr.gets)
-        @stderr+=line
-        puts line
-      end
-
-      unless @stdout.nil?
-        @stdout=@stdout.strip
-      end
-      unless @stderr.nil?
-        @stderr=@stderr.strip
-      end
-
+      @status = status.to_i
+      @status == 0 ? true : false
     end
-    @status = status.to_i
-    @status == 0 ? true : nil
-  end
 
-  EOV
+  end
 end
