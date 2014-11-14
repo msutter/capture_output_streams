@@ -13,27 +13,31 @@ Here an example with the git-up gem.
 git-up is a command line utility, but I wanted to use it in my code.
 So, to sync a repo, one would do:
 
-    [1] pry(main)> require 'git-up'
-    => true
-    [2] pry(main)> GitUp.new.run([])
-    Fetching origin
-    master up to date
-    => nil
+```ruby
+[1] pry(main)> require 'git-up'
+=> true
+[2] pry(main)> GitUp.new.run([])
+Fetching origin
+master up to date
+=> nil
+```
 
 My repo is synced now, but the method is only returning nil and the outputs are directly pushed to the console.
 
 So if I want to hide the output from the console, I could do something like:
 
-    [3] pry(main)> require 'capture_output_streams'
-    => true
-    [4] pry(main)> cos = capture_output_streams {GitUp.new.run([])}
-    => #<struct  stdout="Fetching origin\n\e[1mmaster \e[0m\e[32mup to date\e[0m\n", stderr="">
-    [5] pry(main)> cos.stdout
-    => "Fetching origin\n\e[1mmaster \e[0m\e[32mup to date\e[0m\n"
-    [6] pry(main)> puts cos.stdout
-    Fetching origin
-    master up to date
-    => nil
+```ruby
+[3] pry(main)> require 'capture_output_streams'
+=> true
+[4] pry(main)> cos = capture_output_streams {GitUp.new.run([])}
+=> #<struct  stdout="Fetching origin\n\e[1mmaster \e[0m\e[32mup to date\e[0m\n", stderr="">
+[5] pry(main)> cos.stdout
+=> "Fetching origin\n\e[1mmaster \e[0m\e[32mup to date\e[0m\n"
+[6] pry(main)> puts cos.stdout
+Fetching origin
+master up to date
+=> nil
+```
 
 ## Installation
 
@@ -55,10 +59,10 @@ Pass your code within a block to capture_output_streams, and you'll get a struct
 
 a simple puts statment
 ```ruby
-    [1] pry(main)> require 'capture_output_streams'
-    => true
-    [2] pry(main)> capture_output_streams { puts "hello world" }
-    => #<struct  stdout="hello world\n", stderr="">
+[1] pry(main)> require 'capture_output_streams'
+=> true
+[2] pry(main)> capture_output_streams { puts "hello world" }
+=> #<struct  stdout="hello world\n", stderr="">
 ```
 
 a more complete example:
