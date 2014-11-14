@@ -16,6 +16,7 @@ So, to sync a repo, one would do:
 ```ruby
 [1] pry(main)> require 'git-up'
 => true
+
 [2] pry(main)> GitUp.new.run([])
 Fetching origin
 master up to date
@@ -29,10 +30,13 @@ So if I want to hide the output from the console, I could do something like:
 ```ruby
 [3] pry(main)> require 'capture_output_streams'
 => true
+
 [4] pry(main)> cos = capture_output_streams {GitUp.new.run([])}
 => #<struct  stdout="Fetching origin\n\e[1mmaster \e[0m\e[32mup to date\e[0m\n", stderr="">
+
 [5] pry(main)> cos.stdout
 => "Fetching origin\n\e[1mmaster \e[0m\e[32mup to date\e[0m\n"
+
 [6] pry(main)> puts cos.stdout
 Fetching origin
 master up to date
@@ -61,6 +65,7 @@ a simple puts statment
 ```ruby
 [1] pry(main)> require 'capture_output_streams'
 => true
+
 [2] pry(main)> capture_output_streams { puts "hello world" }
 => #<struct  stdout="hello world\n", stderr="">
 ```
@@ -73,10 +78,12 @@ a more complete example:
 [3] pry(main)*   $stderr.puts "im a failure"
 [3] pry(main)* end
 => #<struct  stdout="Fri Nov 14 11:37:23 CET 2014\n--------------------\n", stderr="im a failure\n">
+
 [4] pry(main)> puts cos.stdout
 Fri Nov 14 11:37:23 CET 2014
 --------------------
 => nil
+
 [5] pry(main)> puts cos.stderr
 im a failure
 => nil
