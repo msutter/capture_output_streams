@@ -10,12 +10,12 @@ While writing my own cli tool (gitlab_admin), i wanted to use the
 great gitup gem to update my local git branches.
 
 I also wanted to control and format the console output of my own cli tools,
-But the author of the Gitup gem uses 'puts' and 'system' statement in his
+but the author of the git-up gem uses 'puts' and 'system' statement in his
 code and I did not want to alter his code.
 
 Here an example with the git-up gem.
 
-git-up is a command line utility, but I wanted to use it inmy code.
+git-up is a command line utility, but I wanted to use it in my code.
 So, to sync a repo, one would do:
 
     [1] pry(main)> require 'git-up'
