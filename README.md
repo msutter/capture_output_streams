@@ -2,16 +2,11 @@
 
 Control output streams of third party gems or libraries.
 
-There are so many cool ruby gems and libraries out there.
-What if you want to use one of them in your cli application
-without having a way to capture or modify the output streams.
+There are so many cool ruby gems and libraries out there. What if you want to use one of them in your cli application without having a way to capture or modify the output streams.
 
-While writing my own cli tool (gitlab_admin), i wanted to use the
-great gitup gem to update my local git branches.
+While writing my own cli tool, i wanted to use the great [git-up](https://github.com/aanand/git-up) gem to update my local git branches.
 
-I also wanted to control and format the console output of my own cli tools,
-but the author of the git-up gem uses 'puts' and 'system' statement in his
-code and I did not want to alter his code.
+I also wanted to control and format the console output of my own cli tools, but the author of the git-up gem uses 'puts' and 'system' statement in his code and I did not want to alter his code.
 
 Here an example with the git-up gem.
 
@@ -25,8 +20,7 @@ So, to sync a repo, one would do:
     master up to date
     => nil
 
-My repo is synced now, but the method is only returning nil and the
-outputs are directly pushed to the console.
+My repo is synced now, but the method is only returning nil and the outputs are directly pushed to the console.
 
 So if I want to hide the output from the console, I could do something like:
 
@@ -57,31 +51,32 @@ Or install it yourself as:
 
 ## Usage
 
-Pass your code within a block to capture_output_streams, and you'll get a
-Struct back with the output streams.
+Pass your code within a block to capture_output_streams, and you'll get a struct back with the output streams.
 
 a simple puts statment
-
+```ruby
     [1] pry(main)> require 'capture_output_streams'
     => true
     [2] pry(main)> capture_output_streams { puts "hello world" }
     => #<struct  stdout="hello world\n", stderr="">
+```
 
 a more complete example:
-
-    [3] pry(main)> cos = capture_output_streams do
-    [3] pry(main)*   system('date')
-    [3] pry(main)*   puts "--------------------"
-    [3] pry(main)*   $stderr.puts "i'm a failure"
-    [3] pry(main)* end
-    => #<struct  stdout="Fri Nov 14 11:37:23 CET 2014\n--------------------\n", stderr="i'm a failure\n">
-    [4] pry(main)> puts cos.stdout
-    Fri Nov 14 11:37:23 CET 2014
-    --------------------
-    => nil
-    [5] pry(main)> puts cos.stderr
-    i'm a failure
-    => nil
+```ruby
+[3] pry(main)> cos = capture_output_streams do
+[3] pry(main)*   system('date')
+[3] pry(main)*   puts "--------------------"
+[3] pry(main)*   $stderr.puts "im a failure"
+[3] pry(main)* end
+=> #<struct  stdout="Fri Nov 14 11:37:23 CET 2014\n--------------------\n", stderr="im a failure\n">
+[4] pry(main)> puts cos.stdout
+Fri Nov 14 11:37:23 CET 2014
+--------------------
+=> nil
+[5] pry(main)> puts cos.stderr
+im a failure
+=> nil
+```
 
 ## Note
 The kernel system and backticks (``) methods are also dynamically mocked
